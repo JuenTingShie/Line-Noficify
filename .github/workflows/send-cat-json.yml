@@ -1,6 +1,8 @@
 name: send-cat-daily
 
 on:
+  schedule:
+    - cron: "00 10 * * *"
   workflow_dispatch:
   
 jobs:
