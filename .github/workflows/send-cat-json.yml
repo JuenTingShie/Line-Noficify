@@ -21,6 +21,7 @@ jobs:
           echo "Thumbnail=$Thumbnail" >> $GITHUB_OUTPUT
 
       - name: send
+        if: success()
         env:
           Message: "UwU"
           Target: https://notify-api.line.me/api/notify
