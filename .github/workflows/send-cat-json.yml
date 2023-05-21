@@ -8,19 +8,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: query
+        id: query
         env:
           Url: "https://catasaservice.xyz/api/random"
         run: |
           json=$(curl https://catasaservice.xyz/api/random) && \
           Fullsize=$(echo $json | jq .data.photos[0].full) && \
-          Thumbnail=$(echo $json | jq .data.photos[0].medium)
+          Thumbnail=$(echo $json | jq .data.photos[0].medium) && \
+          echo "Fullsize=$Fullsize" >> $GITHUB_OUTPUT && \
+          echo "Thumbnail=$Thumbnail" >> $GITHUB_OUTPUT && \
 
       - name: send
         env:
           Message: "UwU"
           Target: https://notify-api.line.me/api/notify
+          Fullsize: ${{ steps.query.outputs.Fullsize }}
+          Thumbnail: ${{ steps.query.outputs.Thumbnail }}
         run: |
-          curl -H 'Authorization: Bearer ${{ secrets.GROUP_TOKEN_1 }}' \
+          curl -H 'Authorization: Bearer ${{ secrets.TEST_TOKEN_1 }}' \
           -F "message=$Message" \
           -F "imageFullsize=$Fullsize" \
           -F "imageThumbnail=$Thumbnail" \
