@@ -3,6 +3,11 @@
 A [LINE message](https://line.me/)'s service [LINE Notify](https://notify-bot.line.me/doc/en/) API learning,
 compose with Github Action.
 
+## Message Content using APIs
+
+1. [Cat-as-a-service API](https://github.com/gdsclpu/cat-as-a-service)
+2. [Cat as a service](https://cataas.com/)
+
 ### Reference
 
 1. [LINE Notify API Document](https://notify-bot.line.me/doc/en/)
