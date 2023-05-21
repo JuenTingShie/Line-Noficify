@@ -1,0 +1,24 @@
+name: send-get-off-work-daily
+
+on:
+  schedule:
+    - cron: "00 18 * * *"
+  workflow_dispatch:
+  
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send
+        env:
+          Message: "UwU"
+          Image: "https://cataas.com/cat"
+          Target: https://notify-api.line.me/api/notify
+        run: |
+          "Authorization: Bearer ${{ secret.GROUP_TOKEN }}" \
+          -F "message=$Message" \
+          -F "imageFullsize=$Image" \
+          -F "imageThumbnail=$Image" \
+          $Target
+          
+    
