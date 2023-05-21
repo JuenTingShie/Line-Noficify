@@ -15,10 +15,8 @@ jobs:
           Image: "https://cataas.com/cat"
           Target: https://notify-api.line.me/api/notify
         run: |
-          'Authorization: Bearer ${{ secrets.GROUP_TOKEN_1 }}' \
+          curl -H 'Authorization: Bearer ${{ secrets.GROUP_TOKEN_1 }}' \
           -F "message=$Message" \
           -F "imageFullsize=$Image" \
           -F "imageThumbnail=$Image" \
           $Target
-          
-    
