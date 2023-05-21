@@ -16,7 +16,7 @@ jobs:
           Fullsize=$(echo $json | jq .data.photos[0].full) && \
           Thumbnail=$(echo $json | jq .data.photos[0].medium) && \
           echo "Fullsize=$Fullsize" >> $GITHUB_OUTPUT && \
-          echo "Thumbnail=$Thumbnail" >> $GITHUB_OUTPUT && \
+          echo "Thumbnail=$Thumbnail" >> $GITHUB_OUTPUT
 
       - name: send
         env:
