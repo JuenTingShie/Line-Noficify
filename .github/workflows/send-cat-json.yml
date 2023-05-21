@@ -12,8 +12,8 @@ jobs:
           Url: "https://catasaservice.xyz/api/random"
         run: |
           json=$(curl https://catasaservice.xyz/api/random) && \
-          Fullsize=$($json | jq .data.photos[0].full) && \
-          Thumbnail=$($json | jq .data.photos[0].medium)
+          Fullsize=$(echo $json | jq .data.photos[0].full) && \
+          Thumbnail=$(echo $json | jq .data.photos[0].medium)
 
       - name: send
         env:
