@@ -2,7 +2,7 @@ name: send-get-off-work-daily
 
 on:
   schedule:
-    - cron: "00 18 * * *"
+    - cron: "00 10 * * *"
   workflow_dispatch:
   
 jobs:
