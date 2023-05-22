@@ -4,10 +4,22 @@ on:
   schedule:
     - cron: "00 10 * * *"
   workflow_dispatch:
-  
+
 jobs:
-  send-message:
+  set-matrix:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: echo "::set-output name=matrix::${{secrets.TOKENS}}"
+
+  send-message:
+    needs: set-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        token: ${{fromJson(steps.set-matrix.outputs.matrix)}}
     steps:
       - name: query
         id: query
@@ -28,7 +40,7 @@ jobs:
           Fullsize: ${{ steps.query.outputs.Fullsize }}
           Thumbnail: ${{ steps.query.outputs.Thumbnail }}
         run: |
-          curl -H 'Authorization: Bearer ${{ secrets.TEST_TOKEN_1 }}' \
+          curl -H 'Authorization: Bearer ${{ matrix.token }}' \
           -F "message=$Message" \
           -F "imageFullsize=$Fullsize" \
           -F "imageThumbnail=$Thumbnail" \
