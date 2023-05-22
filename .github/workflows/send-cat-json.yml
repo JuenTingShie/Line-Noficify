@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        token: ${{ fromJson(steps.set-matrix.outputs.matrix) }}
+        token: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
     steps:
       - name: query
         id: query
