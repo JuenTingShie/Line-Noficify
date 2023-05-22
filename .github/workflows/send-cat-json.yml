@@ -12,7 +12,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: echo "::set-output name=matrix::${{secrets.TOKENS}}"
+        run: echo "matrix={{ secrets.TOKENS }}" >> $GITHUB_OUTPUT
 
   send-message:
     needs: set-matrix
