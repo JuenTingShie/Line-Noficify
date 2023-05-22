@@ -28,7 +28,7 @@ jobs:
           Fullsize: ${{ steps.query.outputs.Fullsize }}
           Thumbnail: ${{ steps.query.outputs.Thumbnail }}
         run: |
-          curl -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
+          curl -H 'Authorization: Bearer ${{ secrets.TOKENS }}' \
           -F "message=$Message" \
           -F "imageFullsize=$Fullsize" \
           -F "imageThumbnail=$Thumbnail" \
