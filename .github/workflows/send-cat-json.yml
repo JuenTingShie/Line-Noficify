@@ -6,21 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  set-matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - id: set-matrix
-        run: |
-          echo "matrix=${{ secrets.TOKENS }}" >> $GITHUB_OUTPUT && \
-          echo "${{ fromJson(secrets.TOKENS) }}"
   send-message:
-    needs: set-matrix
     runs-on: ubuntu-latest
-    strategy:
-      matrix: 
-        token: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
     steps:
       - name: query
         id: query
@@ -41,7 +28,7 @@ jobs:
           Fullsize: ${{ steps.query.outputs.Fullsize }}
           Thumbnail: ${{ steps.query.outputs.Thumbnail }}
         run: |
-          curl -H 'Authorization: Bearer ${{ matrix.token }}' \
+          curl -H 'Authorization: Bearer ${{ secrets.TOKEN }}' \
           -F "message=$Message" \
           -F "imageFullsize=$Fullsize" \
           -F "imageThumbnail=$Thumbnail" \
