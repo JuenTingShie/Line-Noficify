@@ -13,8 +13,8 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          echo "matrix={{ secrets.TOKENS }}" >> $GITHUB_OUTPUT && \
-          echo "${{ fromJson($matrix) }}"
+          echo "matrix=${{ secrets.TOKENS }}" >> $GITHUB_OUTPUT && \
+          echo "${{ fromJson(${{ secrets.TOKENS }}) }}"
   send-message:
     needs: set-matrix
     runs-on: ubuntu-latest
